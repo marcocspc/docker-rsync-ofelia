@@ -1,0 +1,8 @@
+services:
+  docker-rsync-ofelia:
+    restart: always
+    build:
+      context: .
+    volumes:
+      - "./ofelia_config.ini:/ofelia_config.ini"
+      - "./backup_files:/data_to_backup/"

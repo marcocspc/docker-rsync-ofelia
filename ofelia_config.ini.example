@@ -1,0 +1,3 @@
+[job-local "rsync backup at 3am"]
+schedule = 0 0 3 * * *
+command = /bin/ash -c "rsync >> /dev/sdtout 2>&1"
