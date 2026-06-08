@@ -1,3 +1,9 @@
-[job-local "rsync backup at 3am"]
-schedule = 0 0 3 * * *
-command = /bin/ash -c "rsync >> /dev/sdtout 2>&1"
+[job-local "mysql database backup at 1am"]
+schedule = 0 0 1 * * *
+command = /bin/ash -c \"mysqldump -P 3306 -h <server-ip> -u <db-user> --databases <schema-name> > /data_to_backup/db-backup.sql && \
+          rsync -a -e 'ssh -i /my_ssh_key.key -o UserKnownHostsFile=/known_hosts' \ 
+          /data_to_backup <user>@<server-ip>:<backup-destination-path>\"
+
+[job-local "custom script at 1am"]
+schedule = 0 0 1 * * *
+command = /script.sh

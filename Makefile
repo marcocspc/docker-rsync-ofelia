@@ -2,15 +2,12 @@
 DOCKER_COMPOSE:=$(shell which docker-compose || echo 'docker compose')
 RCLONE:=$(shell which rclone)
 
-#include envfile
-include ./borgmatic-rclone.env
-
 .PHONY: all
 all: build
 
 .PHONY: build
 build:
-	BUILDKIT_PROGRESS=plain $(DOCKER_COMPOSE) build
+	BUILDKIT_PROGRESS=plain docker build . -t docker-rsync-ofelia
 
 .PHONY: info
 info:
@@ -29,8 +26,8 @@ shell:
 
 .PHONY: config-files
 config-files:
-	cp docker-rsync-ofelia.env.example docker-rsync-ofelia.env
 	cp ofelia_config.ini.example ofelia_config.ini
+	touch known_hosts
 
 .PHONY: run
 run:
