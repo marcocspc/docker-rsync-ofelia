@@ -1,3 +1,10 @@
+FROM alpine:3.23.0 as ofelia
+
+RUN apk --no-cache add go gcc musl-dev git
+
+WORKDIR /ofelia
+RUN git clone https://github.com/mcuadros/ofelia
+
 WORKDIR /ofelia/ofelia
 RUN git checkout 44ac008a34905eb4ceb540a213a2238e4545b4df
 RUN go build -o /go/bin/ofelia .
