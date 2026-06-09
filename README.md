@@ -55,3 +55,14 @@ Uncomment the following line inside `docker-compose.yaml:
 ```
       #- "./script.sh:/script.sh"
 ```
+
+### Generating an SSH Key
+
+To generate an SSH Key, to the following:
+```
+ssh-keygen -t ecdsa -b 521 
+```
+
+Then mount it in the container by modifying the `volumes:` section of the `docker-compose.yaml` file.
+
+
